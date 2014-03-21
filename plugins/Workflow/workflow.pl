@@ -106,7 +106,7 @@ sub init_registry {
                     }
                 },
                 menus   => {
-                    'manage:workflow'   => {
+                    'settings:workflow'   => {
                         label   => 'Workflow',
                         # mode    => 'edit_workflow',
                         mode    => 'list',
