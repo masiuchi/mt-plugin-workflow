@@ -47,27 +47,25 @@
         type="submit"
         accesskey="s"
         title="<__trans phrase="Save changes to this [_1] (s)" params="<mt:var name="object_label" lower_case="1">">"
-        class="primary-button"
+        class="save action primary button"
         ><__trans phrase="Save Changes"></button>
 </mt:setvartemplate>
 
 <mt:include name="include/header.tmpl" id="header_include">
-
-    <mt:include name="include/actions_bar.tmpl" hide_pager="1">
 
     <fieldset>
 <mtapp:setting
     id="name"
     label="<__trans phrase="Name">">
     <div class="textarea-wrapper">
-        <input name="name" id="name" class="full-width" maxlength="100" value="<mt:var name="name" escape="html">" class="wide" />
+        <input name="name" id="name" class="text" value="<mt:var name="name" escape="html">" />
     </div>
 </mtapp:setting>
 
 <mtapp:setting
     id="description"
     label="<__trans phrase="Description">">
-    <textarea name="description" id="description" rows="" cols="" class="full-width short"><mt:var name="description" escape="html"></textarea>
+    <textarea name="description" id="description" rows="" cols="" class="text low"><mt:var name="description" escape="html"></textarea>
 </mtapp:setting>
     </fieldset>
 
