@@ -181,8 +181,9 @@ sub init_cms_app {
         if ($r->stash ('workflow_transferred')) {
             $app->redirect (
                 $app->uri (
-                    mode => 'list_entry',
+                    mode => 'list',
                     args    => {
+                        _type => 'entry',
                         blog_id => $entry->blog_id,
                         workflow_transferred => 1,
                     }
