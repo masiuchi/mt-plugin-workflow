@@ -257,7 +257,7 @@ sub edit_entry_param {
 
     $param->{transfer_author_loop} = [ map { { transfer_author_id => $_->id, transfer_author_name => $names{$_->id} } } @authors ];
 
-    my $workflow_author_transfer_field = $tmpl->createElement ('app:setting', { id => 'workflow_author_transfer', label => 'Transfer To', shown => 0 });
+    my $workflow_author_transfer_field = $tmpl->createElement ('app:setting', { id => 'workflow_author_transfer', label => 'Transfer To', shown => 0, label_class => 'top-label' });
     my $innerHTML = qq{
         <select name="workflow_author_transfer" id="workflow_author_transfer">
             <option value="">Select an author</option>
@@ -299,7 +299,7 @@ sub edit_entry_param {
         }
     }
 
-    my $workflow_status_field = $tmpl->createElement ('app:setting', { id => 'workflow_status', label => 'Status' });
+    my $workflow_status_field = $tmpl->createElement ('app:setting', { id => 'workflow_status', label => 'Status', label_class => 'top-level' });
     $innerHTML = qq{
         <script type="text/javascript">
             function updateNote() {
@@ -325,7 +325,7 @@ sub edit_entry_param {
         <mt:if name="workflow_has_previous_step"><option value="-3">Return to previous step: <mt:var name="workflow_previous_step_name"></option></mt:if>
         <mt:if name="workflow_has_step">
             <option value="-2" selected="selected">Remain in: <mt:var name="workflow_current_step_name"></option>
-            <mt:else><option value="1"<mt:if name="status_draft"> selected="selected"</mt:if>>Unpublished</option></mt:else>
+            <mt:else><option value="1"<mt:if name="status_draft"> selected="selected"</mt:if>>Unpublished (Draft)</option></mt:else>
         </mt:if>
         <mt:if name="workflow_next_step_published">
             <option value="2"<mt:if name="status_publish"> selected="selected"</mt:if>>Published</option>
@@ -339,7 +339,7 @@ sub edit_entry_param {
     $workflow_status_field->innerHTML ($innerHTML);
     $tmpl->insertBefore ($workflow_status_field, $workflow_author_transfer_field);
 
-    my $workflow_change_field = $tmpl->createElement ('app:setting', { id => 'workflow_change_note', label => 'Change Note', shown => 0 });
+    my $workflow_change_field = $tmpl->createElement ('app:setting', { id => 'workflow_change_note', label => 'Change Note', shown => 0, label_class => 'top-level' });
     $innerHTML = qq{
         <textarea type="text" class="full-width short" rows="" cols="" id="workflow_change_note" name="workflow_change_note"></textarea>
     };
