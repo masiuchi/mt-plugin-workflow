@@ -76,8 +76,7 @@ sub init_registry {
             'cms_pre_save.entry'                        => \&pre_save_entry,
             'cms_post_save.entry'                       => \&post_save_entry,
 
-            'MT::App::CMS::template_source.list_entry'  => '$Workflow::Workflow::CMS::list_entry_source',
-            'MT::App::CMS::template_param.list_entry'   => '$Workflow::Workflow::CMS::list_entry_param',
+            'MT::App::CMS::template_source.entry_list_header' => '$Workflow::Workflow::CMS::entry_list_header_source',
 
             'cms_post_save.workflow_step'               => '$Workflow::Workflow::CMS::post_workflow_step_save',
 

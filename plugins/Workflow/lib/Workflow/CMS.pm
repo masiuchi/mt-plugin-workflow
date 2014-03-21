@@ -348,19 +348,20 @@ sub edit_entry_param {
 
 }
 
-sub list_entry_source {
+sub entry_list_header_source {
     my ($cb, $app, $tmpl) = @_;
-    my $old = q{    </div>
+    my $old = <<'__TMPL__';
+    </div>
 </mt:setvarblock>
-<mt:unless name="is_power_edit">};
+__TMPL__
     my $new = q{
-        <mt:if name="workflow_transferred">
-            <mtapp:statusmsg
-                id="workflow_transferred"
-                class="success">
-                <__trans phrase="The [_1] has been transferred." params="<mt:var name="object_label">">
-            </mtapp:statusmsg>
-        </mt:if>
+    <mt:if name="request.workflow_transferred">
+        <mtapp:statusmsg
+            id="workflow_transferred"
+            class="success">
+            <__trans phrase="The [_1] has been transferred." params="<mt:var name="object_label">">
+        </mtapp:statusmsg>
+    </mt:if>
     };
 
     $$tmpl =~ s{\Q$old\E}{$new$old}ms;
