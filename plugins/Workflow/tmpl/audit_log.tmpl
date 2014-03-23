@@ -4,24 +4,24 @@
     <mt:if name="__first__">
     <thead>
         <tr>
-            <th id="audit-action" colspan="2">Action</th>
-            <th id="action-by"><__trans phrase="_LOG_TABLE_BY"></th>
-            <th id="transferred-to">Transferred To</th>
-            <th id="date"><__trans phrase="Date"></th>
+            <th id="audit-action" class="col head primary" colspan="2"><span class="col-label">Action</span></th>
+            <th id="action-by" class="col head" style="width: 17%;"><span class="col-label"><__trans phrase="_LOG_TABLE_BY"></span></th>
+            <th id="transferred-to" class="col head" style="width: 17%;"><span class="col-label">Transferred To</span></th>
+            <th id="date" class="col head" style="width: 17%;"><span class="col-label"><__trans phrase="Date"></span></th>
         </tr>
     </thead>
     <tbody>
     </mt:if>
         <tr class="<mt:if name="note">log-detail-parent </mt:if><mt:if name="__odd__">odd<mt:else>even</mt:if>"<mt:if name="note"> id="log-detail-parent-<$mt:var name="id"$>"</mt:if>>
     <mt:if name="note">
-            <td class="details-toggle si"><a href="javascript:void(0)" onclick="toggleActive('log-detail-<$mt:var name="id"$>'); toggleActive('log-detail-parent-<$mt:var name="id"$>'); return false;"><img src="<$mt:var name="static_uri"$>images/spacer.gif" alt="" width="9" height="9" /></a></td>
+            <td class="details-toggle si col"><a href="javascript:void(0)" onclick="toggleActive('log-detail-<$mt:var name="id"$>'); toggleActive('log-detail-parent-<$mt:var name="id"$>'); return false;"><img src="<$mt:var name="static_uri"$>images/spacer.gif" alt="" width="9" height="9" /></a></td>
     <mt:else>
-            <td class="details-toggle si">&nbsp;</td>
+            <td class="details-toggle si col">&nbsp;</td>
     </mt:if>
-            <td class="audit-action"><mt:var name="action_taken"></td>
-            <td class="action-by"><mt:if name="username"><$mt:var name="username"$><mt:else><__trans phrase="[_1]" params="<$mt:var name="log_ip"$>"></mt:if></td>
-            <td class="transferred-to"><mt:var name="transferred_to_username"></td>
-            <td class="date"><mt:if name="is_last"><a name="last"></a></mt:if><span title="<$mt:var name="created_on_formatted"$>"><mt:if name="created_on_relative"><mt:if name="dates_relative"><$mt:var name="created_on_relative"$><mt:else><$mt:var name="created_on_formatted"$></mt:if><mt:else><$mt:var name="created_on_formatted"$></mt:if></span></td>
+            <td class="audit-action col"><mt:var name="action_taken"></td>
+            <td class="action-by col"><mt:if name="username"><$mt:var name="username"$><mt:else><__trans phrase="[_1]" params="<$mt:var name="log_ip"$>"></mt:if></td>
+            <td class="transferred-to col"><mt:var name="transferred_to_username"></td>
+            <td class="date col"><mt:if name="is_last"><a name="last"></a></mt:if><span title="<$mt:var name="created_on_formatted"$>"><mt:if name="created_on_relative"><mt:if name="dates_relative"><$mt:var name="created_on_relative"$><mt:else><$mt:var name="created_on_formatted"$></mt:if><mt:else><$mt:var name="created_on_formatted"$></mt:if></span></td>
         </tr>
     <mt:if name="note">
         <tr class="log-detail <mt:if name="__odd__">odd<mt:else>even</mt:if>" id="log-detail-<$mt:var name="id"$>">
@@ -36,11 +36,11 @@
 <div class="actions-bar">
     <div class="actions-bar-inner pkg actions">
         <button
-            onclick="closeDialog(); return false"
-            type="submit"
-            accesskey="x"
-            title="<__trans phrase="Close (x)">"
-            ><__trans phrase="Close"></button>
+           type="submit"
+           accesskey="x"
+           class="cancel action button mt-close-dialog"
+           title="<__trans phrase="Close (x)">"
+           ><__trans phrase="Close"></button>
     </div>
 </div>
 </form>
