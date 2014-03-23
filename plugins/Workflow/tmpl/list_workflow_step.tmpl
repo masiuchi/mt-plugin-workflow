@@ -17,14 +17,15 @@ function saveOrder(f) {
 </mt:setvarblock>
 
 <mt:setvarblock name="action_buttons">
-                <a href="javascript:void(0)"
-                    onclick="doRemoveItems(getByID('<$mt:var name="object_type"$>-listing-form'), '<mt:var name="object_label" lower_case="1" escape="js">', '<mt:var name="object_label_plural" lower_case="1" escape="js">'); return false;"
+                <button class="button"
                     accesskey="x"
-                    title="<__trans phrase="Delete selected [_1] (x)" params="<mt:var name="object_label_plural">">"
-                    ><__trans phrase="Delete"></a>
-                <a href="javascript:void(0)"
-                    onclick="saveOrder(getByID('<$mt:var name="object_type"$>-listing-form')); return false;"
-                    title="<__trans phrase="Save Order">"><__trans phrase="Save Order"></a>
+                    onclick="doRemoveItems(getByID('<$mt:var name="object_type"$>-listing-form'), '<mt:var name="object_label" lower_case="1" escape="js">', '<mt:var name="object_label_plural" lower_case="1" escape="js">'); return false;">
+                    <__trans phrase="Delete">
+                </button>
+                <button class="button"
+                    onclick="saveOrder(getByID('<$mt:var name="object_type"$>-listing-form')); return false;">
+                    <__trans phrase="Save Order">
+                </button>
 
 </mt:setvarblock>
 <mt:setvarblock name="content_header">
@@ -35,22 +36,22 @@ function saveOrder(f) {
     <mt:if __first__>
         <thead>
             <tr>
-                <th class="cb"><input type="checkbox" name="id-head" value="all" class="select" /></th>
-                <th class="cb">&nbsp;</th>
-                <th>Name</th>
+                <th class="col head"><span class="col-label"><input type="checkbox" name="id-head" value="all" class="select" /></span></th>
+                <th class="col head"><span class="col-label">&nbsp;</span></th>
+                <th class="col head primary"><span class="col-label">Name</span></th>
             </tr>
         </thead>
         <tbody>
     </mt:if>
     <tr class="<mt:if name="__odd__">odd<mt:else>even</mt:if>" id="<mt:var name="id">_row">
-        <td class="cb"><input type="checkbox" name="id" value="<mt:var name="id">" class="select" /></td>
-        <td nowrap="nowrap">
+        <td class="col"><input type="checkbox" name="id" value="<mt:var name="id">" class="select" /></td>
+        <td class="col" nowrap="nowrap">
 <input type="hidden" name="<mt:var name="id">_order" id="<mt:var name="id">_order" value="<mt:var name="order">" />
 <a href="javascript:void(0);" onclick="moveRow('up', '<mt:var name="id">')"><img src="<mt:var name="static_uri">plugins/Workflow/nav-arrow-up.gif" border="0" /></a>
 <a href="javascript:void(0);" onclick="moveRow('down', '<mt:var name="id">')"><img src="<mt:var name="static_uri">plugins/Workflow/nav-arrow-down.gif" border="0" /></a>
 </td>
 
-        <td><a href="<$mt:var name="script_url"$>?__mode=view&amp;_type=<mt:var name="object_type">&amp;id=<$mt:var name="id"$>&amp;blog_id=<$mt:var name="blog_id"$>"><mt:var name="name"></a></td>
+        <td class="col"><a href="<$mt:var name="script_url"$>?__mode=view&amp;_type=<mt:var name="object_type">&amp;id=<$mt:var name="id"$>&amp;blog_id=<$mt:var name="blog_id"$>"><mt:var name="name"></a></td>
     </tr>
     <mt:if __last__>
         </tbody>
