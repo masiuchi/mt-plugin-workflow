@@ -24,7 +24,7 @@
 <mt:setvarblock name="related_content">
 <mtapp:widget
     id="step-role-widget"
-    label="Roles">
+    label="<__trans phrase="Roles">">
     <ul>
         <mt:loop name="roles">
         <li><input type="checkbox" class="cb" id="role_id_<mt:var name="role_id">" name="role_id" value="<mt:var name="role_id">"<mt:if name="role_checked"> checked="checked"</mt:if> /> <mt:var name="role_name"></li>
@@ -33,7 +33,7 @@
 </mtapp:widget>
 <mtapp:widget
     id="step-author-widget"
-    label="Authors">
+    label="<__trans phrase="Authors">">
     <ul>
         <mt:loop name="authors">
         <li><input type="checkbox" class="cb" id="author_id_<mt:var name="author_id">" name="author_id" value="<mt:var name="author_id">"<mt:if name="author_checked"> checked="checked"</mt:if> /> <mt:var name="author_name"></li>

@@ -34,7 +34,7 @@ $plugin = MT::Plugin::Workflow->new ({
         id          => 'Workflow',
         name        => 'Workflow',
         version     => $VERSION,
-        description => 'Workflow can limit publishing rights to editors, can limit specified authors to posting only drafts, and lets an author pass ownership of an entry to any other author or editor with appropriate permissions.  Authors are notified when ownership of an entry is transferred.',
+        description => '<__trans phrase="Workflow can limit publishing rights to editors, can limit specified authors to posting only drafts, and lets an author pass ownership of an entry to any other author or editor with appropriate permissions. Authors are notified when ownership of an entry is transferred.">',
         plugin_link => 'http://www.movabletype.org/',
         author_name => 'Six Apart',
         author_link => 'http://www.movabletype.org/',
@@ -55,6 +55,8 @@ $plugin = MT::Plugin::Workflow->new ({
         },
 
         schema_version  => '0.61',
+
+        l10n_class => 'Workflow::L10N',
 });
 MT->add_plugin ($plugin);
 
@@ -442,7 +444,7 @@ sub _transfer_entry {
     $entry->created_by ($old_author->id) if (!$entry->created_by);
 
     # And save the entry
-    $entry->save or return $eh->error ("Error saving transferred entry: " . $entry->errstr);
+    $entry->save or return $eh->error ( $plugin->translate("Error saving transferred entry: [_1]", $entry->errstr) );
 }
 
 sub transfer_entry {
@@ -467,8 +469,9 @@ sub transfer_entry {
         # Perform the actual entry transfer
         $plugin->_transfer_entry ($eh, $app, %params) or return $eh->error ($eh->errstr);
 
-        $app->log ("Entry #".$entry->id." transferred from '".$old_author->name.
-                "' to '".$new_author->name."' by '".$app->{author}->name."'");
+        $app->log ( $plugin->translate( "Entry #[_1] transferred from '[_2]' to '[_3]' by '[_4]'",
+            $entry->id, $old_author->name, $new_author->name, $app->{author}->name,
+        ));
 
         # Run the PostTransfer callbacks
         MT->run_callbacks ('Workflow::PostTransfer', $app, $entry, $new_author, $app->user);
@@ -477,7 +480,7 @@ sub transfer_entry {
         return 1;
     }
     else {
-        return $eh->error ("Entry cannot be transfered");
+        return $eh->error ( $plugin->translate("Entry cannot be transfered") );
     }
 }
 
@@ -574,7 +577,10 @@ sub post_transfer {
     require MT::App;
     my $app = MT::App->instance;
 
-    my $log_message = $obj->class_label . " #" . $obj->id . " transferred to " . $to->name;
+    my $log_message = $plugin->translate(
+        "[_1] #[_2] transferred to [_3]",
+        $obj->class_label, $obj->id, $to->name,
+    );
 
     $app->log ($log_message);
 }
@@ -646,7 +652,7 @@ sub post_transfer_entry {
 
         my $body = $app->build_email ('transfer_notification.tmpl', \%params);
         MT::Mail->send (\%head, $body) or
-        $app->log ("Error sending transfer notification email to ".$a->name);
+        $app->log ( $plugin->translate("Error sending transfer notification email to [_1]", $a->name) );
     }
 }
 

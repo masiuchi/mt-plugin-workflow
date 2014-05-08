@@ -37,11 +37,11 @@ __PACKAGE__->install_properties ({
 });
 
 sub class_label {
-    MT->translate ('Step');
+    MT->component('workflow')->translate ('Step');
 }
 
 sub class_label_plural {
-    MT->translate ('Steps');
+    MT->component('workflow')->translate ('Steps');
 }
 
 sub next {

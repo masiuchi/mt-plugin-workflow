@@ -257,10 +257,10 @@ sub edit_entry_param {
 
     $param->{transfer_author_loop} = [ map { { transfer_author_id => $_->id, transfer_author_name => $names{$_->id} } } @authors ];
 
-    my $workflow_author_transfer_field = $tmpl->createElement ('app:setting', { id => 'workflow_author_transfer', label => 'Transfer To', shown => 0, label_class => 'top-label' });
+    my $workflow_author_transfer_field = $tmpl->createElement ('app:setting', { id => 'workflow_author_transfer', label => '<__trans_section component="workflow"><__trans phrase="Transfer To"></__trans_section>', shown => 0, label_class => 'top-label' });
     my $innerHTML = qq{
         <select name="workflow_author_transfer" id="workflow_author_transfer">
-            <option value="">Select an author</option>
+            <option value=""><__trans_section component="workflow"><__trans phrase="Select an author"></__trans_section></option>
             <mt:loop name="transfer_author_loop">
                 <option value="<mt:var name="transfer_author_id">"><mt:var name="transfer_author_name"></option>
             </mt:loop>
@@ -299,7 +299,7 @@ sub edit_entry_param {
         }
     }
 
-    my $workflow_status_field = $tmpl->createElement ('app:setting', { id => 'workflow_status', label => 'Status', label_class => 'top-level' });
+    my $workflow_status_field = $tmpl->createElement ('app:setting', { id => 'workflow_status', label => '<__trans phrase="Status">', label_class => 'top-level' });
     $innerHTML = qq{
         <script type="text/javascript">
             function updateNote() {
@@ -321,25 +321,27 @@ sub edit_entry_param {
             }
         </script>
 
+    <__trans_section component="workflow">
     <select id="workflow_status" name="workflow_status" class="full-width" onchange="updateNote();">
-        <mt:if name="workflow_has_previous_step"><option value="-3">Return to previous step: <mt:var name="workflow_previous_step_name"></option></mt:if>
+        <mt:if name="workflow_has_previous_step"><option value="-3"><__trans phrase="Return to previous step: [_1]" params="<mt:var name="workflow_previous_step_name">"></option></mt:if>
         <mt:if name="workflow_has_step">
-            <option value="-2" selected="selected">Remain in: <mt:var name="workflow_current_step_name"></option>
+            <option value="-2" selected="selected"><__trans phrase="Remain in: [_1]" params="<mt:var name="workflow_current_step_name">"></option>
             <mt:else><option value="1"<mt:if name="status_draft"> selected="selected"</mt:if>>Unpublished (Draft)</option></mt:else>
         </mt:if>
         <mt:if name="workflow_next_step_published">
-            <option value="2"<mt:if name="status_publish"> selected="selected"</mt:if>>Published</option>
-            <option value="4"<mt:if name="status_future"> selected="selected"</mt:if>>Scheduled</option>
+            <option value="2"<mt:if name="status_publish"> selected="selected"</mt:if>><__trans phrase="Published"></option>
+            <option value="4"<mt:if name="status_future"> selected="selected"</mt:if>><__trans phrase="Scheduled"></option>
             <mt:else>
-            <option value="-1">Ready for next step: <mt:var name="workflow_next_step_name"></option>
+            <option value="-1"><__trans phrase="Ready for next step: [_1]" params="<mt:var name="workflow_next_step_name">"></option>
         </mt:if>
-        <option value="-4">Transfer...</option>
+        <option value="-4"><__trans phrase="Transfer..."></option>
     </select>
+    </__trans_section>
     };
     $workflow_status_field->innerHTML ($innerHTML);
     $tmpl->insertBefore ($workflow_status_field, $workflow_author_transfer_field);
 
-    my $workflow_change_field = $tmpl->createElement ('app:setting', { id => 'workflow_change_note', label => 'Change Note', shown => 0, label_class => 'top-level' });
+    my $workflow_change_field = $tmpl->createElement ('app:setting', { id => 'workflow_change_note', label => '<__trans_section component="workflow"><__trans phrase="Change Note"></__trans_section>', shown => 0, label_class => 'top-level' });
     $innerHTML = qq{
         <textarea type="text" class="full-width short" rows="" cols="" id="workflow_change_note" name="workflow_change_note"></textarea>
     };
