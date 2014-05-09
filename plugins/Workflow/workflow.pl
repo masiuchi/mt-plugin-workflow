@@ -77,6 +77,8 @@ sub init_registry {
             'MT::App::CMS::template_param.edit_entry'   => '$Workflow::Workflow::CMS::edit_entry_param',
             'cms_pre_save.entry'                        => \&pre_save_entry,
             'cms_post_save.entry'                       => \&post_save_entry,
+            'cms_pre_save.page'                        => \&pre_save_entry,
+            'cms_post_save.page'                       => \&post_save_entry,
 
             'MT::App::CMS::template_source.entry_list_header' => '$Workflow::Workflow::CMS::entry_list_header_source',
 
@@ -115,7 +117,7 @@ sub init_registry {
                         args    => { _type => 'workflow_step' },
                         order   => 10000,
                         permission  => 'edit_all_posts',
-                        view    => 'blog',
+                        view    => [ 'website', 'blog' ],
                     }
                 }
             }
@@ -184,7 +186,7 @@ sub init_cms_app {
                 $app->uri (
                     mode => 'list',
                     args    => {
-                        _type => 'entry',
+                        _type => $entry->class,
                         blog_id => $entry->blog_id,
                         workflow_transferred => 1,
                     }
@@ -635,7 +637,7 @@ sub post_transfer_entry {
             mode    => 'view',
             args    => {
                 blog_id => $obj->blog_id,
-                _type   => 'entry',
+                _type   => $obj->class,
                 id      => $obj->id,
             }
         );

@@ -148,7 +148,7 @@ sub view_audit_log {
         template    => $tmpl,
         terms   => {
             object_id    => $id,
-            object_datasource   => 'entry',
+            object_datasource   => $entry->class,
         },
         code    => sub {
             my ($obj, $row) = @_;
@@ -222,8 +222,6 @@ sub save_workflow_order {
 
 sub edit_entry_param {
     my ($cb, $app, $param, $tmpl) = @_;
-
-    return unless ($param->{object_type} eq 'entry');
 
     my $step;
     my $e;
